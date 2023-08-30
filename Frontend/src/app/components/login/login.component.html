@@ -1,0 +1,15 @@
+<div class="contenido">
+
+    <div class="formulario">
+        <h1>Iniciar sesión</h1>
+        <form *ngIf="!(auth.isLoggedIn() | async)" [formGroup]="form" (ngSubmit)="onSubmit()">
+            <input type="email" formControlName="email" placeholder="Correo">
+            <input type="password" formControlName="password" placeholder="Contraseña">
+            <div class="botones">
+                <button type="submit">Enviar</button>
+                <button type="reset">Reiniciar</button>
+            </div>
+        </form>
+    </div>
+
+</div>

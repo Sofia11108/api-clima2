@@ -1,0 +1,13 @@
+<nav>
+    <div class="logo">
+        <img src="https://cdn-icons-png.flaticon.com/512/831/831268.png" alt="logo">
+        <h2>Weather Api</h2>
+    </div>
+    
+    <p *ngIf="!(auth.isLoggedIn() | async)">Para poder buscar un lugar, es necesario iniciar sesión.</p>
+    <div class=" elementos">
+        <a [routerLink]="['/']">Inicio</a>
+        <button *ngIf="auth.isLoggedIn() | async" (click)="auth.logout()">Salir</button>
+        <a *ngIf="!(auth.isLoggedIn() | async)" [routerLink]="['/login']">Iniciar sesión</a>
+    </div>
+</nav>

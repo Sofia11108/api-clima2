@@ -1,0 +1,72 @@
+<div class="contenido" [style.background-color]="backgroundColor">
+  <div class="formulario" *ngIf="auth.isLoggedIn() | async">
+    <h1>Buscar ciudad</h1>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="datos">
+        <input type="text" formControlName="place" placeholder="Ciudad" />
+        <select formControlName="country">
+          <option value="" disabled selected hidden>Selecciona un país</option>
+          <option *ngFor="let country of countries" [value]="country.code">
+            {{ country.name }}
+          </option>
+        </select>
+      </div>
+      <div class="botones">
+        <button type="submit" (click)="getTime(countries[0].code)">
+          Enviar
+        </button>
+        <button type="reset">Reiniciar</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="card">
+    <div class="time">
+      <p>{{ fecha }} | {{ hora }}</p>
+    </div>
+    <br />
+    <div class="ciudad">
+      <h2>{{ data.name }}</h2>
+      <h3>{{ data?.sys?.country | lowercase }}</h3>
+    </div>
+    <div class="elementos">
+      <div class="image-container">
+        <img [src]="weatherIconUrl" [alt]="weather" />
+      </div>
+
+      <h4>{{ weather }}</h4>
+    </div>
+    <div class="temperaturas">
+      <p>{{ data?.main?.temp - 272.15 | number : "1.0-0" }} °C</p>
+    </div>
+    <div class="descripcion">
+      <p>{{ data?.weather?.[0]?.description }}</p>
+    </div>
+    <ul class="informacion">
+      <li>
+        <i class="wi wi-humidity"></i> Humedad: {{ data?.main?.humidity }}%
+      </li>
+      <li>
+        <i class="wi wi-barometer"></i> Presión: {{ data?.main?.pressure }} hPa
+      </li>
+      <li>
+        <i class="wi wi-direction-right"></i> Latitud: {{ data?.coord?.lat }}
+      </li>
+      <li>
+        <i class="wi wi-direction-down"></i> Longitud: {{ data?.coord?.lon }}
+      </li>
+      <li>
+        <i class="wi wi-wind-beaufort-12"></i> Viento | Velocidad:
+        {{ data?.wind?.speed }} m/s
+      </li>
+      <li>
+        <i class="wi wi-strong-wind"></i> Viento | Dirección:
+        {{ data?.wind?.deg }}°
+      </li>
+      <li>
+        <i class="wi wi-fog"></i> Porcentaje de nubosidad:
+        {{ data?.clouds?.all }}%
+      </li>
+    </ul>
+  </div>
+</div>

@@ -43,7 +43,6 @@ export class HomeComponent implements OnInit {
       place: ['', Validators.required],
       country: ['', Validators.required],
     });
-    console.log("place " + this.place);
 
     this.client.getRequest(`${this.url_Api}=${this.key_Api}&q=${this.place},${this.country}&lang=es`)
       .subscribe(
